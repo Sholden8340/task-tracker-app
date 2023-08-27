@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TaskController extends Controller
 {
@@ -12,15 +13,18 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // retrieve tasks
+        $tasks = Session::get('tasks');
+        if (Session::has("tasks")) {
 
-        if (session()->has("tasks")) {
-            $tasks = session("tasks");
+            if (is_a($tasks, Task::class)) {
+                $tasks = array($tasks);
+            }
+            return view("task.view", [
+                "tasks" => $tasks
+            ]);
         }
 
-        return view("task.view", [
-            "tasks" => $tasks
-        ]);
+        return view("task.view");
     }
 
     /**
@@ -37,30 +41,24 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        // validation
-        // not null
-        // valid user? ??
-
         $request->validate([
             'name' => ['required', 'max:255'],
             // 'description' => ['required'],
         ]);
 
         // store
-
         $task = new Task([
             "name" => $request->name,
             "description" => $request->description,
             'is_complete' => false,
         ]);
 
-
-        if (session()->has("tasks")) {
-            session()->push("tasks", $task);
+        if (Session::has("tasks")) {
+            $tasks  = array(Session::get("tasks"));
+            array_push($tasks, $task);
+            Session::put('tasks', $tasks);
         } else {
-            session([
-                "tasks" => [$task]
-            ]);
+            Session::put('tasks', $task);
         }
 
         return redirect()->route("task");

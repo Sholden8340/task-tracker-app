@@ -28,8 +28,8 @@ Route::post('/task', [TaskController::class, 'store']);
 
 Route::get('/task/new', [TaskController::class, 'create'])->name("create");
 
-Route::get('/task/{id}', [TaskController::class, 'show'])->name("view");
+Route::put('/task/{id}/complete', [TaskController::class, 'edit'])->name("task.complete");
+Route::delete('/task/{id}/complete', [TaskController::class, 'edit'])->name("task.incomplete");
 
-Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name("delete");
-
-Route::put('/task/{id}', [TaskController::class, 'edit'])->name("edit");
+Route::put('/task/{id}', [TaskController::class, 'edit'])->name("task.edit");
+Route::delete('/task/{id}', [TaskController::class, 'edit'])->name("task.delete");
