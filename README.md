@@ -6,6 +6,6 @@
 
 <https://laravel.com/docs/10.x/vite#configuring-hmr-in-sail-on-wsl2>
 
-Every time you use a new CSS class.
+Every time you use a new Tailwind CSS class.
 
 ```sail npm run build```
