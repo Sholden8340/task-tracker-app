@@ -19,11 +19,17 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('/user', [UserController::class, 'index'])->name("user");
+Route::get('/user', [UserController::class, 'index'])->name("login");
+Route::get('/user', [UserController::class, 'index'])->name("logout");
 
-Route::get('/task', [TaskController::class, 'index']);
-Route::post('/task', [TaskController::class, 'index']);
 
-Route::get('/task/{id}', [TaskController::class, 'index']);
-Route::delete('/task/{id}', [TaskController::class, 'index']);
-Route::put('/task/{id}', [TaskController::class, 'index']);
+Route::get('/task', [TaskController::class, 'index'])->name("task");
+Route::post('/task', [TaskController::class, 'store']);
+
+Route::get('/task/new', [TaskController::class, 'create'])->name("create");
+
+Route::get('/task/{id}', [TaskController::class, 'show'])->name("view");
+
+Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name("delete");
+
+Route::put('/task/{id}', [TaskController::class, 'edit'])->name("edit");

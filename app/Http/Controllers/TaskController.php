@@ -12,8 +12,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
-        return view("task.view");
+        // retrieve tasks
+
+        if (session()->has("tasks")) {
+            $tasks = session("tasks");
+        }
+
+        return view("task.view", [
+            "tasks" => $tasks
+        ]);
     }
 
     /**
@@ -30,7 +37,33 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+        // not null
+        // valid user? ??
+
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            // 'description' => ['required'],
+        ]);
+
+        // store
+
+        $task = new Task([
+            "name" => $request->name,
+            "description" => $request->description,
+            'is_complete' => false,
+        ]);
+
+
+        if (session()->has("tasks")) {
+            session()->push("tasks", $task);
+        } else {
+            session([
+                "tasks" => [$task]
+            ]);
+        }
+
+        return redirect()->route("task");
     }
 
     /**
