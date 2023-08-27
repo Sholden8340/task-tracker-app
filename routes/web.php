@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,9 @@ Route::get('/', function () {
 
 // Route::get('/user', [UserController::class, 'index'])->name("user");
 
-// Route::get('/task', [TaskController::class, 'index']);
-// Route::post('/task', [TaskController::class, 'index']);
+Route::get('/task', [TaskController::class, 'index']);
+Route::post('/task', [TaskController::class, 'index']);
 
-// Route::get('/task/{id}', [TaskController::class, 'index']);
-// Route::delete('/task/{id}', [TaskController::class, 'index']);
-// Route::put('/task/{id}', [TaskController::class, 'index']);
+Route::get('/task/{id}', [TaskController::class, 'index']);
+Route::delete('/task/{id}', [TaskController::class, 'index']);
+Route::put('/task/{id}', [TaskController::class, 'index']);

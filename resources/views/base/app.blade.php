@@ -9,7 +9,20 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="bg-slate-200 justify-center m-5">
+    <nav class="p-6 bg-white flex justify-between mb-4">
+        <ul class="flex items-center">
+            <li><a href=" route('dashboard')" class="p-3">Home</a></li>
+            <li><a href="" class="p-3">Task</a></li>
+            <li><a href="" class="p-3">Create a new task</a></li>
+            <li><a href="" class="p-3">Delete</a></li>
+        </ul>
+        <ul class="flex items-center">
+            <li><a href="" class="p-3">Login</a></li>
+            <li><a href="" class="p-3">Logout</a></li>
+
+        </ul>
+    </nav>
     @yield('content')
 </body>
 
