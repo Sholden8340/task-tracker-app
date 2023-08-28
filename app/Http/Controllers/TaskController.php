@@ -71,17 +71,30 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Task $task)
+    public function edit($taskId)
     {
-        //
+        $task = $this->taskRepository->getTaskById($taskId);
+        return view("task.edit", [
+            "task" => $task,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $taskId)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            // 'description' => ['required'],
+        ]);
+        $this->taskRepository->updateTask($taskId, [
+            "name" => $request->name,
+            "description" => $request->description,
+
+        ]);
+
+        return redirect()->route("task");
     }
 
     /**

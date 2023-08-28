@@ -34,5 +34,7 @@ Route::put('/task/{id}/complete', [TaskController::class, 'markAsComplete'])->na
 Route::get('/tasks/incomplete', [TaskController::class, 'incompleteTasksIndex'])->name("tasks.incomplete");
 Route::delete('/task/{id}/incomplete', [TaskController::class, 'markAsIncomplete'])->name("task.incomplete");
 
-Route::put('/task/{id}', [TaskController::class, 'edit'])->name("task.edit");
+Route::get('/task/{id}', [TaskController::class, 'edit'])->name("task.edit");
+Route::put('/task/{id}', [TaskController::class, 'update'])->name("task.edit");
+
 Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name("task.delete");

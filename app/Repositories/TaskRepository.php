@@ -48,11 +48,9 @@ class TaskRepository implements TaskRepositoryInterface
     public function updateTask($taskId, array $newDetails)
     {
         $task = $this->taskCollection->find($taskId);
-        // $task = $task->update($newDetails);
         foreach ($newDetails as $key => $value) {
             $task[$key] = $value;
         }
-        // dd($task);
         $this->taskCollection->replace($task);
     }
 
