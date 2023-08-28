@@ -36,7 +36,7 @@
 
                         <form action="{{ route('task.edit', $task) }}" method="POST" class="p-4">
                             @csrf
-                            @method('DELETE')
+                            @method('PUT')
                             <button class="bg-blue-500 boder-2 p-4 rounded-lg text-white font-medium">Update
                                 Task</button>
                         </form>

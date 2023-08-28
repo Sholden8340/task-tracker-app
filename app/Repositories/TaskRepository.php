@@ -30,12 +30,13 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getTaskById($taskId)
     {
-        return $this->taskCollection->findOrFail($taskId);
+        return $task = $this->taskCollection->find($taskId);
     }
 
     public function deleteTask($taskId)
     {
-        $this->taskCollection->destroy($taskId);
+        $task = $this->taskCollection->find($taskId);
+        $this->taskCollection->forget($task);
     }
 
     public function createTask(Task $task)
@@ -48,7 +49,6 @@ class TaskRepository implements TaskRepositoryInterface
     {
         $task = $this->taskCollection->find($taskId);
         // $task = $task->update($newDetails);
-
         foreach ($newDetails as $key => $value) {
             $task[$key] = $value;
         }

@@ -32,7 +32,6 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
         return view("task.create");
     }
 
@@ -84,9 +83,10 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy($taskId)
     {
-        //
+        $this->taskRepository->deleteTask($taskId);
+        return back();
     }
 
     public function markAsComplete($taskId)
