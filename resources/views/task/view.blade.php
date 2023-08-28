@@ -2,16 +2,16 @@
 
 @section('content')
 
-    <main class="bg-white content-center p-6 rounded-lg ">
+    <main class="bg-white content-center p-6 rounded-lg mx-auto w-4/5">
 
         <h1 class="text-3xl font-bold block">
-            Tasks
+            {{ $heading }}
         </h1>
         @isset($tasks)
             @foreach ($tasks as $task)
                 <section class="border-4 border-black rounded-lg bg-cyan-100 p-5 mb-5 w-1/2">
 
-                    <div class="flex-auto">
+                    <div class="">
                         @if ($task->is_complete)
                             <span class="max-h-3 inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -28,7 +28,7 @@
                             {{ $task->name }}
                         </h2>
                     </div>
-                    <p>
+                    <p class="block">
                         {{ $task->description }}
                     </p>
                     <p>Task status: {{ $task->is_complete ? 'Complete' : 'Incomplete' }}</p>

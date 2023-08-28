@@ -30,7 +30,7 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getTaskById($taskId)
     {
-        return $task = $this->taskCollection->find($taskId);
+        return $this->taskCollection->find($taskId);
     }
 
     public function deleteTask($taskId)
@@ -58,12 +58,12 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getCompletedTasks()
     {
-        return $this->taskCollection->where("is_completed", true)->all();
+        return $this->taskCollection->where('is_complete', '===', true)->all();
     }
 
     public function getIncompleteTasks()
     {
-        return $this->taskCollection->where("is_completed", false)->all();
+        return $this->taskCollection->where('is_complete', '===', false)->all();
     }
 
     private function storeInSession()

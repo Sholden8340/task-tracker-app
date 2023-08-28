@@ -1,7 +1,7 @@
 @extends('base.app')
 
 @section('content')
-    <main class="flex justify-center">
+    <main class="mx-auto justify-center w-4/5 flex">
 
 
         <div class="bg-white p-6 rounded-lg w-1/2">
