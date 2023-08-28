@@ -58,11 +58,12 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getCompletedTasks()
     {
-        // return $this->taskCollection->where("is_completed", true)->get();
+        return $this->taskCollection->where("is_completed", true)->all();
     }
 
     public function getIncompleteTasks()
     {
+        return $this->taskCollection->where("is_completed", false)->all();
     }
 
     private function storeInSession()

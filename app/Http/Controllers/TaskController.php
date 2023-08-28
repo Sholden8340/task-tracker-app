@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Repositories\TaskRepository;
+use PHPUnit\Framework\TestStatus\Incomplete;
 
 class TaskController extends Controller
 {
@@ -24,7 +25,10 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = $this->taskRepository->getAllTasks();
-        return view("task.view", ["tasks" => $tasks]);
+        return view("task.view", [
+            "tasks" => $tasks,
+            "heading" => "All Tasks"
+        ]);
     }
 
     /**
@@ -99,5 +103,23 @@ class TaskController extends Controller
     {
         $this->taskRepository->updateTask($taskId, ["is_complete" => false]);
         return back();
+    }
+
+    public function incompleteTasksIndex()
+    {
+        $tasks = $this->taskRepository->getIncompleteTasks();
+        return view("task.view", [
+            "tasks" => $tasks,
+            "heading" => "Incomplete Tasks"
+        ]);
+    }
+
+    public function completedTasksIndex()
+    {
+        $tasks = $this->taskRepository->getCompletedTasks();
+        return view("task.view", [
+            "tasks" => $tasks,
+            "heading" => "Completed Tasks"
+        ]);
     }
 }

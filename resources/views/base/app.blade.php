@@ -13,7 +13,9 @@
     <nav class="p-6 bg-white flex justify-between mb-4">
         <ul class="flex items-center">
             <li><a href="/" class="p-3">Home</a></li>
-            <li><a href="{{ route('task') }}" class="p-3">Task</a></li>
+            <li><a href="{{ route('task') }}" class="p-3">All tasks</a></li>
+            <li><a href="{{ route('tasks.complete') }}" class="p-3">Completed tasks</a></li>
+            <li><a href="{{ route('tasks.incomplete') }}" class="p-3">Incompleted tasks</a></li>
             <li><a href="{{ route('create') }}" class="p-3">Create a new task</a></li>
             {{-- <li><a href="{{ route('delete') }}" class="p-3">Delete</a></li> --}}
         </ul>

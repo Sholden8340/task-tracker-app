@@ -28,7 +28,10 @@ Route::post('/task', [TaskController::class, 'store']);
 
 Route::get('/task/new', [TaskController::class, 'create'])->name("create");
 
+Route::get('/tasks/complete', [TaskController::class, 'completedTasksIndex'])->name("tasks.complete");
 Route::put('/task/{id}/complete', [TaskController::class, 'markAsComplete'])->name("task.complete");
+
+Route::get('/tasks/incomplete', [TaskController::class, 'incompleteTasksIndex'])->name("tasks.incomplete");
 Route::delete('/task/{id}/incomplete', [TaskController::class, 'markAsIncomplete'])->name("task.incomplete");
 
 Route::put('/task/{id}', [TaskController::class, 'edit'])->name("task.edit");
