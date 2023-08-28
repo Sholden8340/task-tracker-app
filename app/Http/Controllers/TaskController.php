@@ -5,26 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Repositories\Interfaces\TaskRepositoryInterface;
+use App\Repositories\TaskRepository;
 
 class TaskController extends Controller
 {
+
+    private TaskRepositoryInterface $taskRepository;
+
+    public function __construct(TaskRepositoryInterface $taskRepository)
+    {
+        $this->taskRepository = $taskRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks = Session::get('tasks');
-        if (Session::has("tasks")) {
-
-            if (is_a($tasks, Task::class)) {
-                $tasks = array($tasks);
-            }
-            return view("task.view", [
-                "tasks" => $tasks
-            ]);
-        }
-
-        return view("task.view");
+        $tasks = $this->taskRepository->getAllTasks();
+        return view("task.view", ["tasks" => $tasks]);
     }
 
     /**
@@ -53,14 +53,7 @@ class TaskController extends Controller
             'is_complete' => false,
         ]);
 
-        if (Session::has("tasks")) {
-            $tasks  = array(Session::get("tasks"));
-            array_push($tasks, $task);
-            Session::put('tasks', $tasks);
-        } else {
-            Session::put('tasks', $task);
-        }
-
+        $this->taskRepository->createTask($task);
         return redirect()->route("task");
     }
 
@@ -94,5 +87,17 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+    }
+
+    public function markAsComplete($taskId)
+    {
+        $this->taskRepository->updateTask($taskId, ["is_complete" => true]);
+        return back();
+    }
+
+    public function markAsIncomplete($taskId)
+    {
+        $this->taskRepository->updateTask($taskId, ["is_complete" => false]);
+        return back();
     }
 }
